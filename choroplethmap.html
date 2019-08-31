@@ -1,18 +1,20 @@
 <html>
 	<head>
-		<link rel="stylesheet" href="chloroplethmap.css">
+		<link rel="stylesheet" href="css/chloroplethmap.css">
 	</head>
 	<body>
 		<div class="header">
   			<h1>Mean BMI across the world</h1>
 		</div>
-		<img src="world1.svg" alt="World" width="85%" height="85%" >
+		<img src="images/world1.svg" alt="World" width="85%" height="85%" >
+
+		<div class="slidecontainer">
+  			<input type="range" min="1975" max="2016" value="1975" class="slider" id="myRange">
+		</div>
 
 		<!-- Include all necessary js stuff-->
 		<script src="https://d3js.org/d3.v4.min.js"></script>
 		<script src="jquery-3.4.1.min.js"></script>
-		<div class="slidecontainer">
-  			<input type="range" min="1975" max="2016" value="1975" class="slider" id="myRange">
-		</div>
+		<script src="js/chloroplethmap.js"></script>
 	</body>
 </html>
