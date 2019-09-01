@@ -7,13 +7,14 @@ function initiliazeMap(){
 	$('span.year span').html(year);
 }
 
+// The "transfer" function
 function calculateColor (bmi) {
-
 	var red = 0;
 	var green = 255;
 	bmi = bmi - 16;
 
-	var tmp = Math.round(255/17 * bmi);
+	// this way we move from 0,255,0 to 255,0,0 gradually
+	var tmp = Math.round(255/18 * bmi);
 	red = red + tmp;
 	green = green - tmp;
 
@@ -21,6 +22,7 @@ function calculateColor (bmi) {
 	return color;
 }
 
+// append svg of world with paths and everything to node element
 function createWorldMap(){
 	d3.xml("images/world1.svg").mimeType("image/svg+xml").get(function(error, xml) {
 	   if (error) throw error;
@@ -28,6 +30,7 @@ function createWorldMap(){
 	});
 }
 
+// color the map  according to the year
 function colorMap(year) {
 	$.ajax({
 		url		: 	'/include/function.php',
@@ -47,6 +50,7 @@ function colorMap(year) {
 	});
 }
 
+// initialize everything on ready
 $(document).ready(function() {
 
 	gender 	= 	'Men';
@@ -56,6 +60,7 @@ $(document).ready(function() {
 	createWorldMap();
 	initiliazeMap();
 
+	// change sexes
 	$('#male.button').click(function() {
 	  if (!$(this).hasClass('active')) {
 	  	$(this).addClass('active');
@@ -80,6 +85,7 @@ $(document).ready(function() {
 	  }
 	});
 
+	// implement play button
 	$('#play.button').click(function() {
 	  if (!$(this).hasClass('active')) {
 	  	$(this).addClass('active');
@@ -102,6 +108,7 @@ $(document).ready(function() {
 	  }
 	});
 
+	// change year with moving the slider
     $(".slidecontainer input.slider" ).on("change", function() {
     	colorMap($(this).val());
     	year = $(this).val();
@@ -109,13 +116,24 @@ $(document).ready(function() {
 	});
 });
 
+// used for the play button that will move the slider
 function moveSlider() {
 	var slider = $(".slidecontainer input.slider");
 	var currValue = parseInt(slider.val());
+	// increase year by 1
 	var nextValue = currValue + 1;
 	slider.val(nextValue);
     colorMap(slider.val());
+    //adjust year in the header
 	year = slider.val();
 	$('span.year span').html(year);
 }
 
+// we will use this for the legend
+var dataset = [16, 18, 20, 22, 24, 26, 28, 30, 32 ,34];
+
+	var red = 0;
+	var green = 255;
+	bmi = bmi - 16;
+
+	var tmp = Math.round(255/18 * bmi);
