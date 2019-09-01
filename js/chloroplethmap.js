@@ -1,47 +1,121 @@
-// path to data
-var data = "countries_BMI.json";
+var gender 	= 	null;
+var year	=	null;
+var autoplay = null;
 
-// save bmi with country as key for each year
-var bmi = [];
-// names of countries
-var names = {};
+function initiliazeMap(){
+	colorMap(year);
+	$('span.year span').html(year);
+}
 
-function initiliazeMap(year, value){
-	var Year = "";
-	activeYear = year;
+function calculateColor (bmi) {
 
-	// change value of visualization
-	activeValue = value;
+	var red = 0;
+	var green = 255;
+	bmi = bmi - 16;
 
-	createWorldMap();
+	var tmp = Math.round(255/17 * bmi);
+	red = red + tmp;
+	green = green - tmp;
+
+	var color = 'rgb('+ red + ',' + green + ',0)';
+	return color;
 }
 
 function createWorldMap(){
-	/*
-	var path = d3.geoPath();
-
-	// display map as svg
-	var svg = d3.select("svg");
-
-	// needed to apply gradients
-	var def = svg.append("def");
-
-	// gray rectangle to gradient scale legend
-	var legend = svg.append("g")
-		.attr("class", "legendGrey")
-		.attr("transform", "translate(" + 300 + "," + 650 + ")");
-
-  // color legend in svg-format
-	var legendGradient = svg.append("g")
-		.attr("class", "legendWrapper")
-		.attr("transform", "translate(" + 450 + "," + 650 + ")");
-
-  // create infobox for further information
-	var div = d3.select("body").append("div")
-		.attr("class", "infobox")
-		.style("opacity", 0);
-	*/
-	d3.json("countries_BMI.json").then(function(data) {
-  		console.log(data[0]);
+	d3.xml("images/world1.svg").mimeType("image/svg+xml").get(function(error, xml) {
+	   if (error) throw error;
+	   d3.select(".svgworld").node().appendChild(xml.documentElement);
 	});
 }
+
+function colorMap(year) {
+	$.ajax({
+		url		: 	'/include/function.php',
+		data	: 	{
+			gender		: 	gender,
+			year 		:   year 
+		},
+		type: "POST",
+		dataType: 'json',
+		cache: false,
+		success	: 	function ( result ) {
+			var color = '';
+			for(var i = 0; i < result.length; i++) {
+				$('#'+result[i]['ISO']+'').css('fill',calculateColor(result[i]['Mean BMI']));
+			}
+		}	
+	});
+}
+
+$(document).ready(function() {
+
+	gender 	= 	'Men';
+	year	=	1975;
+	autoplay = null;
+
+	createWorldMap();
+	initiliazeMap();
+
+	$('#male.button').click(function() {
+	  if (!$(this).hasClass('active')) {
+	  	$(this).addClass('active');
+	  	$('#female.button').removeClass('active');
+	  	gender = 'Men';
+	  	colorMap(year);
+	  }
+	  else {
+	  	$('#female.button').removeClass('active');
+	  }
+	});
+
+	$('#female.button').click(function() {
+	  if (!$(this).hasClass('active')) {
+	  	$(this).addClass('active');
+	  	$('#male.button').removeClass('active');
+	  	gender = 'Women';
+	  	colorMap(year);
+	  }
+	  else {
+	  	$('#male.button').removeClass('active');
+	  }
+	});
+
+	$('#play.button').click(function() {
+	  if (!$(this).hasClass('active')) {
+	  	$(this).addClass('active');
+	  	$('#stop.button').removeClass('active');
+	  	autoplay = setInterval("moveSlider()", 100);
+	  }
+	  else {
+	  	$('#stop.button').removeClass('active');
+	  }
+	});
+
+	$('#stop.button').click(function() {
+	  if (!$(this).hasClass('active')) {
+	  	$(this).addClass('active');
+	  	$('#play.button').removeClass('active');
+	  	clearInterval(autoplay);
+	  }
+	  else {
+	  	$('#play.button').removeClass('active');
+	  }
+	});
+
+    $(".slidecontainer input.slider" ).on("change", function() {
+    	colorMap($(this).val());
+    	year = $(this).val();
+    	$('span.year span').html(year);
+	});
+});
+
+function moveSlider() {
+	var slider = $(".slidecontainer input.slider");
+	var currValue = parseInt(slider.val());
+	var nextValue = currValue + 1;
+	slider.val(nextValue);
+    colorMap(slider.val());
+	year = slider.val();
+	$('span.year span').html(year);
+}
+

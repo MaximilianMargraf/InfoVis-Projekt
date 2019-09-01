@@ -1,9 +1,13 @@
 .header {
   padding: 1px;
   text-align: center;
-  background: #1abc9c;
+  background: #4CAF50;
   color: white;
   font-size: 15px;
+}
+
+h1 {
+  margin: 3px 0;
 }
 
 .svg-container {
@@ -47,4 +51,54 @@
   height: 25px; /* Slider handle height */
   background: #4CAF50; /* Green background */
   cursor: pointer; /* Cursor on hover */
+}
+
+label {
+  margin-top: 5px;
+}
+
+.button {
+  float: left;
+  border: solid 1px grey;
+  padding:  5px;
+  margin-left:  5px;
+  cursor: pointer;
+}
+
+.button.autoPlayButton {
+  margin-left:  0;
+}
+
+.button.active { 
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+     -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+          box-shadow: inset 0px 0px 5px #c1c1c1;
+   outline: none;
+}
+
+form {
+  margin: 10px 80px 10px 0;
+  display: block;
+  float: left;
+  display: inline-block;
+}
+
+svg {
+  background: #41678D;  
+  width: 80%;
+  height: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hidden {
+  display:  none;
+}
+
+.sexButton{
+  margin: 10px 80px 10px 0;
+  display: block;
+  display: inline-block;
 }

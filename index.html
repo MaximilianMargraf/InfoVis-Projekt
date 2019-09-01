@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+	<head>
+		<link rel="stylesheet" href="css/chloroplethmap.css">
+		<!-- Include all necessary js stuff-->
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<script src="js/chloroplethmap.js"></script>
+	</head>
+	<body>
+		<div class="header">
+  			<h1>Mean BMI across the world - <span class="year">Year: <span></span></span></h1>
+		</div>
+
+		<div class="sexButton">
+	  		<label>Sex:</label>
+		  	<div class="button active" id="male">Male</div>
+		  	<div class="button" id="female">Female</div>
+		</div>
+
+		<form>
+		  	<div class="button autoPlayButton" id="play">Play</div>
+		  	<div class="button autoPlayButton" id="stop">Stop</div>
+		</form>
+
+		<div class="svgworld">
+			<svg class="hidden" viewBox="0 0 400 0"></svg>
+		</div>
+
+		<div class="slidecontainer">
+  			<input type="range" min="1975" max="2016" value="1975" class="slider" id="myRange">
+		</div>
+	</body>
+</html>
