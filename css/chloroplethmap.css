@@ -1,8 +1,7 @@
 .header {
   padding: 1px;
   text-align: center;
-  background: #4CAF50;
-  color: white;
+  color: black;
   font-size: 15px;
 }
 
@@ -15,14 +14,16 @@ h1 {
     }
 
 .slidecontainer {
-  width: 100%; /* Width of the outside container */
+  width: 80%; /* Width of the outside container */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* The slider itself */
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
-  width: 100%; /* Full-width */
+  width: 99.5%; /* Full-width */
   height: 25px; /* Specified height */
   background: #d3d3d3; /* Grey background */
   outline: none; /* Remove outline */
@@ -53,10 +54,6 @@ h1 {
   cursor: pointer; /* Cursor on hover */
 }
 
-label {
-  margin-top: 5px;
-}
-
 .button {
   float: left;
   border: solid 1px grey;
@@ -77,11 +74,16 @@ label {
    outline: none;
 }
 
+label {
+  float: left;
+  margin-top: 5px;
+}
+
 form {
   margin: 10px 80px 10px 0;
   display: block;
   float: left;
-  display: inline-block;
+  display: block;
 }
 
 svg {
@@ -95,10 +97,4 @@ svg {
 
 .hidden {
   display:  none;
-}
-
-.sexButton{
-  margin: 10px 80px 10px 0;
-  display: block;
-  display: inline-block;
 }
