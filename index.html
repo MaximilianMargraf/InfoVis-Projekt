@@ -7,31 +7,67 @@
 		<script src="https://d3js.org/d3.v4.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<script src="js/chloroplethmap.js"></script>
 	</head>
 	<body>
-		<div class="header">
-  			<h1>Mean BMI across the world - <span class="year">Year: <span></span></span></h1>
-		</div>
+		<div class="container">
+			<div class="header">
+	  			<h1>Mean BMI across the world - <span class="year">Year: <span></span></span></h1>
+			</div>
 
-		<form>
-	  		<label>Sex:</label>
-		  	<div class="button active" id="male">Male</div>
-		  	<div class="button" id="female">Female</div>
-		</form>
-
-		<form>
-		  	<div class="button autoPlayButton" id="play">Play</div>
-		  	<div class="button autoPlayButton" id="stop">Stop</div>
-		</form>
-
-		<div class="svgworld">
-			<svg class="hidden" viewBox="0 0 400 0"></svg>
-		</div>
-		<svg class="legend"></svg>
-
-		<div class="slidecontainer">
-  			<input type="range" min="1975" max="2016" value="1975" class="slider" id="myRange">
+			<div class="col-sm-6 offset-sm-3">
+				<div class="row">
+					<div class="col-sm-6">
+						<form>
+					  		<label>Sex: </label>
+						  	<div class="button active" id="male">Male</div>
+						  	<div class="button" id="female">Female</div>
+						</form>
+					</div>
+					<div class="col-sm-6">
+						<form>
+							<label>Animation: </label>
+						  	<div class="button autoPlayButton" id="play">Play</div>
+						  	<div class="button autoPlayButton" id="stop">Stop</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="svgworld">
+					<div id="hoverInfo"></div>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="dlegend">
+					<svg>
+					  <defs>
+					    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+					      <stop offset="0%" style="stop-color:rgb(0,255,0);stop-opacity:1" />
+					      <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+					    </linearGradient>
+					  </defs>
+					  <rect fill="url(#grad1)" />
+					  <text fill="#ffffff" font-size="30" font-family="Verdana" x="510" y="31">BMI</text>
+					  <span class="legendValue" fill="#ffffff" font-size="30" font-family="Verdana">16</span>
+					  <span class="legendValue" fill="#ffffff" font-size="30" font-family="Verdana">18</span>
+					  <span class="legendValue" fill="#ffffff" font-size="30" font-family="Verdana">20</span>
+					  <span class="legendValue" fill="#ffffff" font-size="30" font-family="Verdana">22</span>
+					  <span class="legendValue" fill="#ffffff" font-size="30" font-family="Verdana">24</span>
+					  <span class="legendValue right" fill="#ffffff" font-size="30" font-family="Verdana">26</span>
+					  <span class="legendValue right" fill="#ffffff" font-size="30" font-family="Verdana">28</span>
+					  <span class="legendValue right" fill="#ffffff" font-size="30" font-family="Verdana">30</span>
+					  <span class="legendValue right" fill="#ffffff" font-size="30" font-family="Verdana">32</span>
+					  <span class="legendValue right" fill="#ffffff" font-size="30" font-family="Verdana">34</span>
+					</svg>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="slidecontainer">
+		  			<input type="range" min="1975" max="2016" value="1975" class="slider" id="myRange">
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

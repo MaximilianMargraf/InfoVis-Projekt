@@ -35,6 +35,7 @@ function colorMap(year) {
 	$.ajax({
 		url		: 	'/include/function.php',
 		data	: 	{
+			action		: 	'getListByGenderAndYear', 
 			gender		: 	gender,
 			year 		:   year 
 		},
@@ -44,10 +45,50 @@ function colorMap(year) {
 		success	: 	function ( result ) {
 			var color = '';
 			for(var i = 0; i < result.length; i++) {
-				$('#'+result[i]['ISO']+'').css('fill',calculateColor(result[i]['Mean BMI']));
+				$('#'+result[i]['ISO']+'').css('fill',calculateColor(result[i]['Mean_BMI']));
 			}
 		}	
 	});
+}
+
+// call function that gives us the information of the country we hover over
+function getHoverInfo (iso) {
+	$.ajax({
+		url		: 	'/include/function.php',
+		data	: 	{
+			action		: 	'getListByCountryAndYear', 
+			iso		: 	iso,
+			year 		:   year 
+		},
+		type: "POST",
+		dataType: 'json',
+		cache: false,
+		success	: 	function ( result ) {
+			$('#hoverInfo').html(buildHoverInfo(result));
+		}	
+	});
+}
+
+// Build string on hover
+function buildHoverInfo (data) {
+	var html = '';
+	var index = null;
+
+	for(var i = 0; i < data.length; i++) {
+		switch(i) {
+			case 0:
+				index = 'Country';
+				break;
+			case 1:
+				index = 'BMI - Men';
+				break;
+			case 2:
+				index = 'BMI - Women';
+				break;
+		}
+		html = html + '<p>' + index + ': ' + data[i] + '</p>'
+	}
+	return html;
 }
 
 // initialize everything on ready
@@ -128,12 +169,3 @@ function moveSlider() {
 	year = slider.val();
 	$('span.year span').html(year);
 }
-
-// we will use this for the legend
-var dataset = [16, 18, 20, 22, 24, 26, 28, 30, 32 ,34];
-
-	var red = 0;
-	var green = 255;
-	bmi = bmi - 16;
-
-	var tmp = Math.round(255/18 * bmi);
